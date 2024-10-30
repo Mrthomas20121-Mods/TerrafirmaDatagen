@@ -6,8 +6,11 @@ import com.google.gson.JsonObject;
 import net.dries007.tfc.common.capabilities.food.FoodData;
 import net.dries007.tfc.common.capabilities.food.FoodTrait;
 import net.dries007.tfc.common.recipes.outputs.*;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
@@ -153,8 +156,43 @@ public class TFCRecipeHelpers {
         return obj;
     }
 
+    public static JsonElement parseFluidStackIngredient(Fluid fluid, int amount) {
+        JsonObject obj = new JsonObject();
+        String fluidName = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(fluid)).toString();
+
+        obj.addProperty("ingredient", fluidName);
+
+        obj.addProperty("amount", amount);
+
+        return obj;
+    }
+
+    public static JsonElement parseFluidStackIngredient(TagKey<Fluid> fluid, int amount) {
+        JsonObject obj = new JsonObject();
+        JsonObject ingredient = new JsonObject();
+        String fluidName = fluid.location().toString();
+
+        ingredient.addProperty("tag", fluidName);
+        obj.add("ingredient", ingredient);
+
+        obj.addProperty("amount", amount);
+
+        return obj;
+    }
+
+    public static JsonElement parseFluidStack(FluidStack stack) {
+        JsonObject fluidStack = new JsonObject();
+
+        String fluidName = Objects.requireNonNull(ForgeRegistries.FLUIDS.getKey(stack.getFluid())).toString();
+
+        fluidStack.addProperty("fluid", fluidName);
+        fluidStack.addProperty("amount", stack.getAmount());
+
+        return fluidStack;
+    }
+
     /**
-     *
+     * turn ItemStackProvider to json
      * @param provider
      * @return
      */
