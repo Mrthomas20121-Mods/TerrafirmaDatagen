@@ -35,7 +35,7 @@ public class BlastFurnaceBuilder extends RecipeBuilder<BlastFurnaceBuilder> {
     }
 
     /**
-     * Set the catalyst to flux, the default catalyst.
+     * Set the input to flux, the default input.
      * @return this
      */
     public BlastFurnaceBuilder defaultCatalyst() {

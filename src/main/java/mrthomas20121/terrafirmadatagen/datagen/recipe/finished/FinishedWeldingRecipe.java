@@ -19,7 +19,7 @@ public record FinishedWeldingRecipe(ResourceLocation id, Ingredient input, Ingre
         jsonObject.add("first_input", input.toJson());
         jsonObject.add("second_input", input2.toJson());
         jsonObject.addProperty("tier", minTier);
-        jsonObject.add("result", TFCRecipeHelpers.provider(output));
+        jsonObject.add("result", TFCRecipeHelpers.parseProvider(output));
     }
 
     @Override

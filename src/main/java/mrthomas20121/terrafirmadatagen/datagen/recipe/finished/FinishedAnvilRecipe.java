@@ -26,7 +26,7 @@ public record FinishedAnvilRecipe(ResourceLocation id, Ingredient input, int min
         Arrays.stream(rules).map(ForgeRule::name).map(String::toLowerCase).forEach(ruleArray::add);
 
         jsonObject.add("input", input.toJson());
-        jsonObject.add("result", TFCRecipeHelpers.provider(output));
+        jsonObject.add("result", TFCRecipeHelpers.parseProvider(output));
         jsonObject.addProperty("tier", minTier);
 
         jsonObject.add("rules", ruleArray);

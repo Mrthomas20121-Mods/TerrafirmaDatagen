@@ -191,12 +191,23 @@ public class TFCRecipeHelpers {
         return fluidStack;
     }
 
+    public static JsonElement parseItemStackIngredient(Ingredient ingredient, int count) {
+        JsonObject object = new JsonObject();
+
+        if(count > 0) {
+            object.addProperty("count", count);
+        }
+        object.add("ingredient", ingredient.toJson());
+
+        return object;
+    }
+
     /**
-     * turn ItemStackProvider to json
+     * turn ItemStackProvider into json
      * @param provider
      * @return
      */
-    public static JsonElement provider(ItemStackProvider provider) {
+    public static JsonElement parseProvider(ItemStackProvider provider) {
         JsonObject obj = new JsonObject();
 
         ItemStack stack = provider.stack().get();
