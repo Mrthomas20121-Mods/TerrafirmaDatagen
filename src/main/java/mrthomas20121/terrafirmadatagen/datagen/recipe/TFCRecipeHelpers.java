@@ -3,18 +3,24 @@ package mrthomas20121.terrafirmadatagen.datagen.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import net.dries007.tfc.common.capabilities.food.FoodData;
 import net.dries007.tfc.common.capabilities.food.FoodTrait;
 import net.dries007.tfc.common.recipes.outputs.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class TFCRecipeHelpers {
 
@@ -209,6 +215,38 @@ public class TFCRecipeHelpers {
         object.add("ingredient", ingredient.toJson());
 
         return object;
+    }
+
+    public static JsonElement parseBlockState(BlockState blockState) {
+        return new JsonPrimitive(blockState.toString());
+    }
+
+    public static JsonElement parseBlockIngredient(TagKey<Block> tag) {
+        JsonObject object = new JsonObject();
+
+        object.addProperty("tag", tag.location().toString());
+
+        return object;
+    }
+
+    public static JsonElement parseBlockIngredient(Block... blocks) {
+        if(blocks.length == 1) {
+            Block block = blocks[0];
+            return new JsonPrimitive(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).toString());
+        }
+        else {
+            JsonArray items = new JsonArray();
+            Stream.of(blocks)
+                    .map(ForgeRegistries.BLOCKS::getKey)
+                    .map(Objects::requireNonNull)
+                    .map(ResourceLocation::toString)
+                    .forEach(s -> {
+                        JsonObject object = new JsonObject();
+                        object.addProperty("block", s);
+                        items.add(object);
+                    });
+            return items;
+        }
     }
 
     /**
