@@ -20,7 +20,7 @@ public record FinishedBlastFurnaceRecipe(ResourceLocation id, JsonElement fluidI
     @Override
     public void serializeRecipeData(JsonObject jsonObject) {
         jsonObject.add("fluid", fluidInput);
-        jsonObject.add("input", catalyst.toJson());
+        jsonObject.add("catalyst", catalyst.toJson());
         jsonObject.add("result", TFCRecipeHelpers.parseFluidStack(output));
     }
 
