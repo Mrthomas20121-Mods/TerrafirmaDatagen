@@ -28,7 +28,6 @@ public record FinishedAnvilRecipe(ResourceLocation id, Ingredient input, int min
         jsonObject.add("input", input.toJson());
         jsonObject.add("result", TFCRecipeHelpers.parseProvider(output));
         jsonObject.addProperty("tier", minTier);
-
         jsonObject.add("rules", ruleArray);
 
         if(applyForgingBonus) {

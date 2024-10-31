@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mrthomas20121.terrafirmadatagen.datagen.recipe.TFCRecipeHelpers;
 import net.dries007.tfc.common.recipes.BlastFurnaceRecipe;
+import net.dries007.tfc.common.recipes.BloomeryRecipe;
 import net.dries007.tfc.common.recipes.TFCRecipeSerializers;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -30,8 +31,8 @@ public record FinishedBloomeryRecipe(ResourceLocation id, JsonElement fluidInput
     }
 
     @Override
-    public @NotNull RecipeSerializer<BlastFurnaceRecipe> getType() {
-        return TFCRecipeSerializers.BLAST_FURNACE.get();
+    public @NotNull RecipeSerializer<BloomeryRecipe> getType() {
+        return TFCRecipeSerializers.BLOOMERY.get();
     }
 
     @Nullable
