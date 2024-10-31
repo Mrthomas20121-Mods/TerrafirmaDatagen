@@ -191,6 +191,15 @@ public class TFCRecipeHelpers {
         return fluidStack;
     }
 
+    public static JsonElement parseItemStack(ItemStack stack) {
+        JsonObject object = new JsonObject();
+
+        object.addProperty("item", Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString());
+        object.addProperty("count", stack.getCount());
+
+        return object;
+    }
+
     public static JsonElement parseItemStackIngredient(Ingredient ingredient, int count) {
         JsonObject object = new JsonObject();
 
