@@ -24,8 +24,6 @@ public class AnvilBuilder extends RecipeBuilder<AnvilBuilder> {
 
     public static AnvilBuilder anvil() { return new AnvilBuilder(); }
 
-    public static WeldingBuilder wielding() { return new WeldingBuilder(); }
-
     private AnvilBuilder() {}
 
     @Override

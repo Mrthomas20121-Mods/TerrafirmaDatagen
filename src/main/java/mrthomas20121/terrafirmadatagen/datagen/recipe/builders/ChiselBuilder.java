@@ -23,7 +23,7 @@ public class ChiselBuilder extends RecipeBuilder<ChiselBuilder> {
 
     private JsonElement input;
     private JsonElement result;
-    private ItemStackProvider extra;
+    private ItemStackProvider extra = null;
 
     private ChiselRecipe.Mode mode;
 

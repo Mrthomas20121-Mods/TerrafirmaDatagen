@@ -3,28 +3,27 @@ package mrthomas20121.terrafirmadatagen.datagen.recipe.finished;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mrthomas20121.terrafirmadatagen.datagen.recipe.TFCRecipeHelpers;
-import net.dries007.tfc.common.recipes.CastingRecipe;
 import net.dries007.tfc.common.recipes.ChiselRecipe;
+import net.dries007.tfc.common.recipes.CollapseRecipe;
 import net.dries007.tfc.common.recipes.TFCRecipeSerializers;
 import net.dries007.tfc.common.recipes.outputs.ItemStackProvider;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public record FinishedChiselRecipe(ResourceLocation id, JsonElement ingredient, ChiselRecipe.Mode mode, JsonElement result, ItemStackProvider extra) implements FinishedRecipe {
+public record FinishedCollapseRecipe(ResourceLocation id, JsonElement ingredient, boolean copyInput, JsonElement result) implements FinishedRecipe {
 
     @Override
     public void serializeRecipeData(JsonObject jsonObject) {
         jsonObject.add("ingredient", ingredient);
-        jsonObject.addProperty("mode", mode.getSerializedName());
-        jsonObject.add("result", result);
 
-        if(extra != null) {
-            jsonObject.add("extra_drop", TFCRecipeHelpers.parseProvider(extra));
+        if(result != null && !copyInput) {
+            jsonObject.add("result", result);
+        }
+        else {
+            jsonObject.addProperty("copyInput", true);
         }
     }
 
@@ -34,8 +33,8 @@ public record FinishedChiselRecipe(ResourceLocation id, JsonElement ingredient, 
     }
 
     @Override
-    public @NotNull RecipeSerializer<ChiselRecipe> getType() {
-        return TFCRecipeSerializers.CHISEL.get();
+    public @NotNull RecipeSerializer<CollapseRecipe> getType() {
+        return TFCRecipeSerializers.COLLAPSE.get();
     }
 
     @Nullable
