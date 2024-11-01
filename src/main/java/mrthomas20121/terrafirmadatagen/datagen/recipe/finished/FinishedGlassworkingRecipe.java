@@ -18,15 +18,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Stream;
 
-public record FinishedGlassworkingRecipe(ResourceLocation id, Ingredient batch, List<GlassOperation> operations, ItemStack result) implements FinishedRecipe {
+public record FinishedGlassworkingRecipe(ResourceLocation id, Ingredient batch, GlassOperation[] operations, ItemStack result) implements FinishedRecipe {
 
     @Override
     public void serializeRecipeData(JsonObject jsonObject) {
 
         JsonArray array = new JsonArray();
 
-        operations.stream().map(GlassOperation::name).map(String::toLowerCase).forEach(array::add);
+        Stream.of(operations).map(GlassOperation::name).map(String::toLowerCase).forEach(array::add);
 
         jsonObject.add("operations", array);
         jsonObject.add("batch", batch.toJson());

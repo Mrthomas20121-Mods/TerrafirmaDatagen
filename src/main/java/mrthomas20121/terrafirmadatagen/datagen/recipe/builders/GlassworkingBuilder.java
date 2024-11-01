@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 public class GlassworkingBuilder extends RecipeBuilder<GlassworkingBuilder> {
 
     private Ingredient batch;
-    private List<GlassOperation> operations;
+    private GlassOperation[] operations;
     private ItemStack result;
 
     public static GlassworkingBuilder create() { return new GlassworkingBuilder(); }
@@ -31,8 +31,8 @@ public class GlassworkingBuilder extends RecipeBuilder<GlassworkingBuilder> {
         return this;
     }
 
-    public GlassworkingBuilder operations(GlassOperationBuilder builder) {
-        this.operations = builder.build();
+    public GlassworkingBuilder operations(GlassOperation... operations) {
+        this.operations = operations;
         return this;
     }
 
