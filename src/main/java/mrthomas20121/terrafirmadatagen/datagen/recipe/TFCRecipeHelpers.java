@@ -209,7 +209,7 @@ public class TFCRecipeHelpers {
     public static JsonElement parseItemStackIngredient(Ingredient ingredient, int count) {
         JsonObject object = new JsonObject();
 
-        if(count > 0) {
+        if(count > 1) {
             object.addProperty("count", count);
         }
         object.add("ingredient", ingredient.toJson());
