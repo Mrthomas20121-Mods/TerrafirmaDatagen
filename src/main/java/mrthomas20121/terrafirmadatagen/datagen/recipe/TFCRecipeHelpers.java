@@ -301,4 +301,14 @@ public class TFCRecipeHelpers {
 
         return array;
     }
+
+    public static JsonArray ingredientsToJsonArray(Ingredient[] arr) {
+        JsonArray array = new JsonArray();
+
+        for(Ingredient value: arr) {
+            array.add(value.toJson());
+        }
+
+        return array;
+    }
 }
