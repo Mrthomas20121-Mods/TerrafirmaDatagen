@@ -12,7 +12,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -281,5 +280,25 @@ public class TFCRecipeHelpers {
         obj.add("modifiers", mods);
 
         return obj;
+    }
+
+    public static JsonArray intArrayToJsonArray(int[] arr) {
+        JsonArray array = new JsonArray();
+
+        for(int value: arr) {
+            array.add(value);
+        }
+
+        return array;
+    }
+
+    public static JsonArray stringIterableToJsonArray(Iterable<String> arr) {
+        JsonArray array = new JsonArray();
+
+        for(String value: arr) {
+            array.add(value);
+        }
+
+        return array;
     }
 }
