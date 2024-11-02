@@ -1,11 +1,8 @@
 package mrthomas20121.terrafirmadatagen.datagen.recipe.finished;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mrthomas20121.terrafirmadatagen.datagen.recipe.TFCRecipeHelpers;
 import net.dries007.tfc.common.capabilities.glass.GlassOperation;
-import net.dries007.tfc.common.recipes.CollapseRecipe;
 import net.dries007.tfc.common.recipes.GlassworkingRecipe;
 import net.dries007.tfc.common.recipes.TFCRecipeSerializers;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -16,7 +13,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -24,12 +20,7 @@ public record FinishedGlassworkingRecipe(ResourceLocation id, Ingredient batch, 
 
     @Override
     public void serializeRecipeData(JsonObject jsonObject) {
-
-        JsonArray array = new JsonArray();
-
-        Stream.of(operations).map(GlassOperation::name).map(String::toLowerCase).forEach(array::add);
-
-        jsonObject.add("operations", array);
+        jsonObject.add("operations", TFCRecipeHelpers.stringIterableToJsonArray(Stream.of(operations).map(o -> o.name().toLowerCase(Locale.ROOT)).toList()));
         jsonObject.add("batch", batch.toJson());
         jsonObject.add("result", TFCRecipeHelpers.parseItemStack(result));
     }
