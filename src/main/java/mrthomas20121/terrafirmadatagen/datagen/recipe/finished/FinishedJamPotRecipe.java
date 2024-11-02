@@ -3,6 +3,7 @@ package mrthomas20121.terrafirmadatagen.datagen.recipe.finished;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import mrthomas20121.terrafirmadatagen.datagen.recipe.TFCRecipeHelpers;
+import net.dries007.tfc.common.recipes.JamPotRecipe;
 import net.dries007.tfc.common.recipes.SoupPotRecipe;
 import net.dries007.tfc.common.recipes.TFCRecipeSerializers;
 import net.dries007.tfc.common.recipes.outputs.ItemStackProvider;
@@ -39,8 +40,8 @@ public record FinishedJamPotRecipe(ResourceLocation id, Ingredient[] input, Json
     }
 
     @Override
-    public @NotNull RecipeSerializer<SoupPotRecipe> getType() {
-        return TFCRecipeSerializers.POT_SOUP.get();
+    public @NotNull RecipeSerializer<JamPotRecipe> getType() {
+        return TFCRecipeSerializers.POT_JAM.get();
     }
 
     @Nullable
