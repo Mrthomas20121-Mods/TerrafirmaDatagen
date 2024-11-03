@@ -1,12 +1,16 @@
 package mrthomas20121.terrafirmadatagen.api;
 
+import mrthomas20121.terrafirmadatagen.api.tags.MetalTag;
 import net.dries007.tfc.util.registry.RegistryMetal;
+import net.minecraft.world.level.material.Fluid;
 
 /**
  * ExtendedRegistryMetal.getHeatCapacityBase(); is the base heat for a metal,
  * 0.35f is the default and is the value used by tfc bronze, copper and iron.
  */
 public interface ExtendedRegistryMetal extends RegistryMetal {
+
+    MetalTag getTags();
 
     /**
      * required by some methods
@@ -27,6 +31,11 @@ public interface ExtendedRegistryMetal extends RegistryMetal {
      * @return the metal melting temperature
      */
     float getMeltTemperature();
+
+    /**
+     * @return metal fluid
+     */
+    Fluid getFluid();
 
     /**
      * this method is why I need the heat capacity for a metal.

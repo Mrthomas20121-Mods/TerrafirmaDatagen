@@ -7,6 +7,7 @@ import com.google.gson.JsonPrimitive;
 import net.dries007.tfc.common.capabilities.food.FoodData;
 import net.dries007.tfc.common.capabilities.food.FoodTrait;
 import net.dries007.tfc.common.recipes.outputs.*;
+import net.dries007.tfc.util.Drinkable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
@@ -292,7 +293,32 @@ public class TFCRecipeHelpers {
         return array;
     }
 
+    public static JsonArray drinkableEffectToJson(Drinkable.Effect[] effects) {
+        JsonArray array = new JsonArray();
+
+        for(Drinkable.Effect effect: effects) {
+            JsonObject obj = new JsonObject();
+
+            obj.addProperty("type", Objects.requireNonNull(ForgeRegistries.MOB_EFFECTS.getKey(effect.type())).toString());
+            obj.addProperty("duration", effect.duration());
+            obj.addProperty("amplifier", effect.amplifier());
+            obj.addProperty("chance", effect.chance());
+        }
+
+        return array;
+    }
+
     public static JsonArray stringIterableToJsonArray(Iterable<String> arr) {
+        JsonArray array = new JsonArray();
+
+        for(String value: arr) {
+            array.add(value);
+        }
+
+        return array;
+    }
+
+    public static JsonArray stringArrayToJsonArray(String[] arr) {
         JsonArray array = new JsonArray();
 
         for(String value: arr) {
