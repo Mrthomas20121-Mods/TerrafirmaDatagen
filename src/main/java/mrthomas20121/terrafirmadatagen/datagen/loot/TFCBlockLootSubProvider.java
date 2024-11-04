@@ -19,5 +19,5 @@ public abstract class TFCBlockLootSubProvider extends BlockLootSubProvider {
         super(p_281507_, p_283552_, p_282212_);
     }
 
-    
+
 }
